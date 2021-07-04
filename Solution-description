@@ -1,0 +1,75 @@
+## What we are expecting:
+1. A link to github repo (or a zip/tarball) with code that accomplishes:
+a) Brings up an AWS instance
+b) Installs ElasticSearch configured in a way that requires credentials and provides encrypted communication
+c) Demonstrates that it is functioning
+
+Below is the solution breifing and code is uploaded to github 
+	
+
+2. Instructions with:
+a) A short description of your solution describing your choices and why did you make them
+=>	I choose terraform to complete this exercise on AWS.
+	Terraform was opted because it helps me to spin up the required EC2 & Elasticsearch.
+	
+b) Resources, if any, that you consulted to arrive at the final solution
+=>	https://registry.terraform.io/
+	
+c) How long did you spend on the exercise, and if possible, short feedback about the exercise
+=>	3 Hours
+	
+3. Must use AWS free tier, however, if you’re using any additional services, please mention them in the instructions
+=>	Used free tier for EC2 but needs to pay for EBS that is used for Elasticsearch.
+
+4. ElasticSearch access and communication must be secure
+=>	Used HTTPS, Node-to-node encryption, Encryption at rest
+	 [ec2-user@ip-172-31-56-157 ~]$ curl -u master -XGET https://vpc-devtest-3klmtzsyvnn3xjuks5x2yjatqq.us-east-1.es.amazonaws.com
+		Enter host password for user 'master':
+		{
+		  "name" : "6b4a2b2b5a6e68aa244436a48910492b",
+		  "cluster_name" : "718454056651:devtest",
+		  "cluster_uuid" : "XAFboB9fRBej5NrGrjJuzw",
+		  "version" : {
+			"number" : "7.10.2",
+			"build_flavor" : "oss",
+			"build_type" : "tar",
+			"build_hash" : "unknown",
+			"build_date" : "2021-06-10T19:33:12.213378Z",
+			"build_snapshot" : false,
+			"lucene_version" : "8.7.0",
+			"minimum_wire_compatibility_version" : "6.8.0",
+			"minimum_index_compatibility_version" : "6.0.0-beta1"
+		  },
+		  "tagline" : "You Know, for Search"
+		}
+	 
+## Bonus if you extend your code to create a cluster of 3 ElasticSearch nodes
+=>	yes have written code which creates cluster of 3 ElasticSearch nodes
+	
+Some answers we are looking:
+1. What did you choose to automate the provisioning and bootstrapping of the instance? Why?
+=>	I choose Terraform to automate the provisioning and bootstrapping of the instance.
+	As terraform is very good orchestrator tool for provisioning and bootstrapping on cloud providers such as AWS.
+	
+2. How did you choose to secure ElasticSearch? Why?
+=>	Enabled HTTPS on ElasticSearch and applied KMS to secure comunication that is provided by the cloud provider for elasticsearch.
+	
+3. How would you monitor this instance? What metrics would you monitor?
+=>	I will use cloudwatch to monitor the elasticsearch instances, can use below metrics
+		SearchRate
+		SearchLatency
+		IndexingLatency
+		FreeStorageSpace
+		CPUUtilization
+	
+4. Could you extend your solution to launch a secure cluster of ElasticSearch nodes? What would need to change to support this use case?
+=>	Already covered this in my code.
+	
+5. Could you extend your solution to replace a running ElasticSearch instance with little or no downtime? How?
+=>	Not clear with the query but we can scale up the instance and bring down old instance using AWS console.
+
+6. Was it a priority to make your code well structured, extensible, and reusable?
+=>	Yes
+	
+7. What sacrifices did you make due to time?
+=>	I planned to take this excercise weekend and sacrificed few hours of weekend. 
